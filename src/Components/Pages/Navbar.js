@@ -250,6 +250,26 @@ function Navbar() {
                   </li>
                 </ul>
               </li>
+              <li className="has-submenu">
+                <a href="#">
+                  <i className="dripicons-copy"></i>Tables
+                </a>
+                <ul className="submenu megamenu">
+                  <li>
+                    <ul>
+                      <li>
+                        <a href="pages-login.html">Country</a>
+                      </li>
+                      <li>
+                        <a href="pages-register.html">State</a>
+                      </li>
+                      <li>
+                        <a href="pages-recoverpw.html">City</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
             </ul>
             {/* <!-- End navigation menu --> */}
           </div>
