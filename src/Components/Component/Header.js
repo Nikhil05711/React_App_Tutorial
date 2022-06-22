@@ -1,7 +1,7 @@
 import React from "react";
-import Leftbar from "./Leftbar";
-import Rightbar from "./Rightbar";
-import Navbar from "./Navbar";
+import Leftbar from "../Pages/Leftbar";
+import Rightbar from "../Pages/Rightbar";
+import Navbar from "../Pages/Navbar";
 import Body from "./Body";
 import Footer from "./Footer";
 

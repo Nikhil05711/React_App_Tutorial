@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -258,7 +259,7 @@ function Navbar() {
                   <li>
                     <ul>
                       <li>
-                        <a href="pages-login.html">Country</a>
+                        <NavLink to="/country">Country</NavLink>
                       </li>
                       <li>
                         <a href="pages-register.html">State</a>
