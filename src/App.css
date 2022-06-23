@@ -1,6 +1,7 @@
 @import url('/src/assets/css/bootstrap.min.css');
 @import url('/src/assets/css/style.css');
 @import url('/src/assets/css/icons.css');
+
 .App {
   text-align: center;
 }

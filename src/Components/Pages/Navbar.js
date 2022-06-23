@@ -10,9 +10,9 @@ function Navbar() {
             {/* <!-- Navigation Menu--> */}
             <ul className="navigation-menu">
               <li className="has-submenu">
-                <a href="index.html">
+                <NavLink to="/">
                   <i className="dripicons-device-desktop"></i>Dashboard
-                </a>
+                </NavLink>
               </li>
               <li className="has-submenu">
                 <a href="calender.html">
@@ -223,7 +223,7 @@ function Navbar() {
                   <li>
                     <ul>
                       <li>
-                        <a href="pages-login.html">Login</a>
+                        <NavLink to="/">Login</NavLink>
                       </li>
                       <li>
                         <a href="pages-register.html">Register</a>
@@ -262,7 +262,7 @@ function Navbar() {
                         <NavLink to="/country">Country</NavLink>
                       </li>
                       <li>
-                        <a href="pages-register.html">State</a>
+                        <NavLink to="/state">State</NavLink>
                       </li>
                       <li>
                         <a href="pages-recoverpw.html">City</a>

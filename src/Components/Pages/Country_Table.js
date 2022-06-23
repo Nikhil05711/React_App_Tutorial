@@ -35,22 +35,22 @@ export const BasicExample = () => {
 
         {/* <!-- For demo purpose --> */}
 
-        <div class="container-fluid py-5 class= cus-top">
-          <div class="row">
-            <div class="col-lg-12 bg-white rounded shadow">
+        <div className="container-fluid py-5 class= cus-top">
+          <div className="row">
+            <div className="col-lg-12 bg-white rounded shadow">
               {/* <!-- Fixed header table--> */}
-              <div class="d-flex pt-2 pb-2 right">
-                <Button class="btn btn-danger">New</Button>
+              <div className="d-flex pt-2 pb-2 right">
+                <Button className="btn btn-danger">New</Button>
               </div>
-              <div class="table-responsive">
-                <table class="table table-fixed">
+              <div className="table-responsive">
+                <table className="table table-fixed">
                   <thead>
                     <tr>
                       {tableHead.map((data, index) => {
                         return (
                           <th
                             scope="col"
-                            class="col-3"
+                            className="col-3"
                             style={{ width: data.width }}
                           >
                             {data.title}
@@ -63,11 +63,11 @@ export const BasicExample = () => {
                     {CountryData.map((data, index) => {
                       return (
                         <tr>
-                          <th scope="row" class="col-3">
+                          <th scope="row" className="col-3">
                             {index + 1}
                           </th>
-                          <td class="col-3">{data.name}</td>
-                          <td class="col-3">{data.code}</td>
+                          <td className="col-3">{data.name}</td>
+                          <td className="col-3">{data.code}</td>
                         </tr>
                       );
                     })}
