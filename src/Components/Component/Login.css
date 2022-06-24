@@ -6498,7 +6498,7 @@ ul.user-messages li .delivery-details p {
   color: #ffffff;
 }
 
-.badge {
+/* .badge {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
@@ -6506,7 +6506,7 @@ ul.user-messages li .delivery-details p {
   padding: .35rem .7rem;
   line-height: 100%;
   vertical-align: middle;
-}
+} */
 
 .badge.badge-primary {
   background: #08663a;
@@ -6540,9 +6540,9 @@ ul.user-messages li .delivery-details p {
   background: #074694;
 }
 
-.badge.badge-danger {
+/* .badge.badge-danger {
   background: #08663a;
-}
+} */
 
 .badge.badge-danger:hover {
   background: #08663a;

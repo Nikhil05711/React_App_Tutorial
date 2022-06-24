@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { setCookie } from "../Library/Cookies";
 import "./Login.css";
-// import { logo } from "./logo.png";
 
 const ColoredLine = ({ color }) => (
   <hr
@@ -41,76 +40,87 @@ export default function Login() {
 
   return (
     <div>
-      <div className="authentication">
-        <div className="container">
-          <div className="row justify-content-md-center">
-            <div className="col-xl-4 col-lg-5 col-md-6 col-sm-12">
-              <div className="login-screen">
-                <div className="login-box">
-                  <a href="#" className="login-logo">
-                    <img src="./logo.png" alt="Admin Dashboard" />
-                  </a>
-                  <h5 style={{ color: "black" }}>
-                    Welcome back,
-                    <br />
-                    Please Login to your Account.
-                  </h5>
-                  <div className="form-group">
+      <div className="accountbg"></div>
+      <div className="wrapper-page">
+        <div className="card">
+          <div className="card-body">
+            <div className="text-center m-b-15">
+              <a href="index.html" className="logo logo-admin">
+                <img src="./logo.png" height="24" alt="logo" />
+              </a>
+            </div>
+            <div className="p-3">
+              <form
+                className="form-horizontal m-t-20"
+                // action="https://mannatthemes.com/zoogler/horizontal/index.html"
+              >
+                <div className="form-group row">
+                  <div className="col-12">
                     <input
-                      type="text"
                       className="form-control"
+                      type="email"
+                      required=""
                       placeholder="Email Address"
                       name="email"
                       onChange={inputHandler}
                     />
                   </div>
-                  <div className="form-group">
+                </div>
+                <div className="form-group row">
+                  <div className="col-12">
                     <input
-                      type="password"
                       className="form-control"
+                      type="password"
+                      required=""
                       placeholder="Password"
                       name="password"
                       onChange={inputHandler}
                     />
                   </div>
-                  <div className="actions mb-4">
+                </div>
+                <div className="form-group row">
+                  <div className="col-12">
                     <div className="custom-control custom-checkbox">
                       <input
                         type="checkbox"
                         className="custom-control-input"
-                        id="remember_pwd"
-                      />
+                        id="customCheck1"
+                      />{" "}
                       <label
                         className="custom-control-label"
-                        htmlFor="remember_pwd"
+                        for="customCheck1"
                       >
                         Remember me
                       </label>
                     </div>
+                  </div>
+                </div>
+                <div className="form-group text-center row m-t-20">
+                  <div className="col-12">
                     <button
+                      className="btn btn-danger btn-block waves-effect waves-light"
                       type="submit"
-                      className="btn btn-primary"
                       onClick={getAuthenticate}
                     >
                       Login
                     </button>
                   </div>
-                  <div className="forgot-pwd">
-                    <a className="link" href="forgot-pwd.html">
-                      Forgot password?
+                </div>
+                <div className="form-group m-t-10 mb-0 row">
+                  <div className="col-sm-7 m-t-20">
+                    <a href="pages-recoverpw.html" className="text-muted">
+                      <i className="mdi mdi-lock"></i>{" "}
+                      <small>Forgot your password ?</small>
                     </a>
                   </div>
-                  <div>
-                    <ColoredLine color="red" />
-                  </div>
-                  <div className="actions align-left">
-                    <span className="additional-link">New here?</span>
-                    <a href="signup.html" className="btn btn-dark">
-                      Create an Account
+                  <div className="col-sm-5 m-t-20">
+                    <a href="pages-register.html" className="text-muted">
+                      <i className="mdi mdi-account-circle"></i>{" "}
+                      <small>Create an account ?</small>
                     </a>
                   </div>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>

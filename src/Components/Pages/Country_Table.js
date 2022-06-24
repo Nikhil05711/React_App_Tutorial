@@ -5,6 +5,7 @@ import Rightbar from "./Rightbar";
 import "./Country_Table.css";
 import { CountryData } from "../../JSON/Table_Data";
 import { Button } from "react-bootstrap";
+import Modal from "../Modal";
 
 export const BasicExample = () => {
   const tableHead = [

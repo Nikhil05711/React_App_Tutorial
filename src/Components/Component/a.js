@@ -1,114 +1,83 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router";
-import { Form } from "react-bootstrap";
-import "../../Content/css/bootstrap.min.css";
-import "../../Content/css/main.css";
-import logo from "../../Content/img/mylogo3.png";
-import { postRequest } from "../../Services/APIService";
-import { setCookie } from "../Cookie";
-
-const ColoredLine = ({ color }) => (
-  <hr
-    style={{
-      color,
-      backgroundColor: color,
-      height: 5,
-    }}
-  />
-);
-export default function Login() {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState();
-  async function getAuthenticate() {
-    var data = await postRequest(
-      `/Account/ApiLogin?MobileNo=${formData.email}&Password=${formData.password}`
-    );
-    console.log("data:", data);
-    if (data.statusCode === 1) {
-      setCookie(".milkyfie_user", JSON.stringify(data.result), 30);
-      return navigate("dashboard");
-    }
-  }
-  const inputHandler = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  return (
-    <div style={{ background: "#08663a" }}>
-      <div className="authentication">
-        <div className="container">
-          <div className="row justify-content-md-center">
-            <div className="col-xl-4 col-lg-5 col-md-6 col-sm-12">
-              <div className="login-screen">
-                <div className="login-box">
-                  <a href="#" className="login-logo">
-                    <img src={logo} alt="Admin Dashboard" />
-                  </a>
-                  <h5 style={{ color: "black" }}>
-                    Welcome back,
-                    <br />
-                    Please Login to your Account.
-                  </h5>
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Email Address"
-                      name="email"
-                      onChange={inputHandler}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input
-                      type="password"
-                      className="form-control"
-                      placeholder="Password"
-                      name="password"
-                      onChange={inputHandler}
-                    />
-                  </div>
-                  <div className="actions mb-4">
-                    <div className="custom-control custom-checkbox">
-                      <input
-                        type="checkbox"
-                        className="custom-control-input"
-                        id="remember_pwd"
-                      />
-                      <label
-                        className="custom-control-label"
-                        htmlFor="remember_pwd"
-                      >
-                        Remember me
-                      </label>
-                    </div>
-                    <button
-                      type="submit"
-                      className="btn btn-primary"
-                      onClick={getAuthenticate}
-                    >
-                      Login
-                    </button>
-                  </div>
-                  <div className="forgot-pwd">
-                    <a className="link" href="forgot-pwd.html">
-                      Forgot password?
-                    </a>
-                  </div>
-                  <div>
-                    <ColoredLine color="red" />
-                  </div>
-                  <div className="actions align-left">
-                    <span className="additional-link">New here?</span>
-                    <a href="signup.html" className="btn btn-dark">
-                      Create an Account
-                    </a>
-                  </div>
+<div>
+  <div className="accountbg"></div>
+  <div className="wrapper-page">
+    <div className="card">
+      <div className="card-body">
+        <div className="text-center m-b-15">
+          <a href="index.html" className="logo logo-admin">
+            <img src="./logo.png" height="24" alt="logo" />
+          </a>
+        </div>
+        <div className="p-3">
+          <form
+            className="form-horizontal m-t-20"
+            action="https://mannatthemes.com/zoogler/horizontal/index.html"
+          >
+            <div className="form-group row">
+              <div className="col-12">
+                <input
+                  className="form-control"
+                  type="email"
+                  required=""
+                  placeholder="Email Address"
+                  name="email"
+                  onChange={inputHandler}
+                />
+              </div>
+            </div>
+            <div className="form-group row">
+              <div className="col-12">
+                <input
+                  className="form-control"
+                  type="password"
+                  required=""
+                  placeholder="Password"
+                  name="password"
+                  onChange={inputHandler}
+                />
+              </div>
+            </div>
+            <div className="form-group row">
+              <div className="col-12">
+                <div className="custom-control custom-checkbox">
+                  <input
+                    type="checkbox"
+                    className="custom-control-input"
+                    id="customCheck1"
+                  />{" "}
+                  <label className="custom-control-label" for="customCheck1">
+                    Remember me
+                  </label>
                 </div>
               </div>
             </div>
-          </div>
+            <div className="form-group text-center row m-t-20">
+              <div className="col-12">
+                <button
+                  className="btn btn-danger btn-block waves-effect waves-light"
+                  type="submit"
+                >
+                  Log In
+                </button>
+              </div>
+            </div>
+            <div className="form-group m-t-10 mb-0 row">
+              <div className="col-sm-7 m-t-20">
+                <a href="pages-recoverpw.html" className="text-muted">
+                  <i className="mdi mdi-lock"></i>{" "}
+                  <small>Forgot your password ?</small>
+                </a>
+              </div>
+              <div className="col-sm-5 m-t-20">
+                <a href="pages-register.html" className="text-muted">
+                  <i className="mdi mdi-account-circle"></i>{" "}
+                  <small>Create an account ?</small>
+                </a>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-  );
-}
+  </div>
+</div>;
