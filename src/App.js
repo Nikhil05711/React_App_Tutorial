@@ -6,6 +6,7 @@ import State_Table from "./Components/Pages/State_Table";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { getCookie } from "./Components/Library/Cookies";
 import Login from "./Components/Component/Login";
+// import Modal from "./Components/Modal";
 
 function App() {
   const navigate = useNavigate();
@@ -33,7 +34,6 @@ function App() {
           <Route exact path="/" element={<Login />} />
         </Routes>
       )}
-      {/* <Login /> */}
     </>
   );
 }

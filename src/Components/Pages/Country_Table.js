@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Leftbar from "./Leftbar";
 import Navbar from "./Navbar";
 import Rightbar from "./Rightbar";
@@ -8,6 +8,7 @@ import { Button } from "react-bootstrap";
 import Modal from "../Modal";
 
 export const BasicExample = () => {
+  const [show, setShow] = useState(false);
   const tableHead = [
     { title: "#", width: "33%" },
     { title: "Name", width: "33%" },
@@ -41,8 +42,20 @@ export const BasicExample = () => {
             <div className="col-lg-12 bg-white rounded shadow">
               {/* <!-- Fixed header table--> */}
               <div className="d-flex pt-2 pb-2 right">
-                <Button className="btn btn-danger">New</Button>
+                <Button
+                  className="btn btn-danger"
+                  onClick={() => setShow(true)}
+                >
+                  New
+                </Button>
               </div>
+              {show && (
+                <Modal
+                  show={show}
+                  onClose={() => setShow(false)}
+                  closeModal={setShow}
+                />
+              )}
               <div className="table-responsive">
                 <table className="table table-fixed">
                   <thead>

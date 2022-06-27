@@ -4,6 +4,7 @@ import Rightbar from "./Rightbar";
 import Navbar from "./Navbar";
 import "./State_Table.css";
 import { Button } from "react-bootstrap";
+import Modal from "../Modal";
 
 export const State_Table = () => {
   // useEffect
@@ -13,6 +14,8 @@ export const State_Table = () => {
 
   //   states
   const [data, setData] = useState([]);
+  const [show, setShow] = useState(false);
+
   // functions
   const callAPi = async () => {
     const url = "https://reqres.in/api/users?page=2";
@@ -53,8 +56,21 @@ export const State_Table = () => {
           <div className="row">
             <div className="col-lg-12 bg-white rounded shadow">
               <div className="d-flex pt-2 pb-2 right">
-                <Button className="btn btn-danger">New</Button>
+                <Button
+                  className="btn btn-danger"
+                  onClick={() => setShow(true)}
+                >
+                  New
+                </Button>
               </div>
+              {show && (
+                <Modal
+                  setData={setData}
+                  show={show}
+                  onClose={() => setShow(false)}
+                  closeModal={setShow}
+                />
+              )}
               <div className="table-responsive">
                 <table className="table table-bordered">
                   <thead>
