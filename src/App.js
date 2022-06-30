@@ -6,7 +6,8 @@ import State_Table from "./Components/Pages/State_Table";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { getCookie } from "./Components/Library/Cookies";
 import Login from "./Components/Component/Login";
-// import Modal from "./Components/Modal";
+import Store from "./Components/Redux/Store";
+import Test from "./Components/Pages/Test";
 
 function App() {
   const navigate = useNavigate();
@@ -22,19 +23,21 @@ function App() {
   }, [page, x]);
 
   return (
-    <>
+    <div>
+      {/* <Test data={{ Name: "Nikhil Chauhan", Age: 22, Hometown: "Aligarh" }} /> */}
       {page ? (
         <Routes>
           <Route exact path="/" element={<Topbar />} />
           <Route exact path="/country" element={<BasicExample />} />
           <Route exact path="/state" element={<State_Table />} />
+          <Route exact path="/redux" element={<Store />} />
         </Routes>
       ) : (
         <Routes>
           <Route exact path="/" element={<Login />} />
         </Routes>
       )}
-    </>
+    </div>
   );
 }
 
