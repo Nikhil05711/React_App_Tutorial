@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
 
 function Modal({ closeModal, setData }) {
   const [input, setInput] = useState({

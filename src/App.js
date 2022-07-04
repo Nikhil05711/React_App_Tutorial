@@ -6,7 +6,6 @@ import State_Table from "./Components/Pages/State_Table";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { getCookie } from "./Components/Library/Cookies";
 import Login from "./Components/Component/Login";
-import Store from "./Components/Redux/Store";
 import Test from "./Components/Pages/Test";
 
 function App() {
@@ -14,6 +13,7 @@ function App() {
   const [page, setPage] = useState(true);
   let x = getCookie(".milkyfie_user");
   useEffect(() => {
+    console.log(x);
     if (!getCookie(".milkyfie_user")) {
       setPage(false);
       return navigate("/");
@@ -30,7 +30,6 @@ function App() {
           <Route exact path="/" element={<Topbar />} />
           <Route exact path="/country" element={<BasicExample />} />
           <Route exact path="/state" element={<State_Table />} />
-          <Route exact path="/redux" element={<Store />} />
         </Routes>
       ) : (
         <Routes>
