@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 function Navbar() {
   return (
@@ -272,6 +273,10 @@ function Navbar() {
                 </ul>
               </li>
             </ul>
+            {/* onClick={() => setShow(true)} */}
+            <div className="pt-2 pb-2 right">
+              <Button className="btn btn-danger">Connect To Wallet</Button>
+            </div>
             {/* <!-- End navigation menu --> */}
           </div>
           {/* <!-- end #navigation --> */}

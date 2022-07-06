@@ -3129,7 +3129,8 @@ body {
     display: none;
   }
   #topnav #navigation {
-    display: block;
+    display: flex;
+    justify-content: space-between;
   }
 }
 @media (max-width: 991px) {
@@ -3654,4 +3655,5 @@ body {
   position: absolute;
   left: 520px;
   top: 0px;
+  z-index: 2;
 }
