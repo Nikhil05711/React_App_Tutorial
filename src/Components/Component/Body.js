@@ -1,17 +1,17 @@
 import React from "react";
 import Breadcrump from "./Breadcrump";
-import Active_Task from "./Active_Task";
-import Project from "./Project";
-import Teams from "./Teams";
-import Budget from "./Budget";
-import Weekly_Record from "./Weekly_Record";
-import Activity from "./Activity";
-import Leads from "./Leads";
-import New_client from "./New_client";
-import Revenue from "./Revenue";
-import Code_Confirm from "./Code_Confirm";
-import Week_Activity from "./Week_Activity";
-import Payment from "./Payment";
+import Active_Task from "../Pages/Active_Task";
+import Project from "../Pages/Project";
+import Teams from "../Pages/Teams";
+import Budget from "../Pages/Budget";
+import Weekly_Record from "../Pages/Weekly_Record";
+import Activity from "../Pages/Activity";
+import Leads from "../Pages/Leads";
+import New_client from "../Pages/New_client";
+import Revenue from "../Pages/Revenue";
+import Code_Confirm from "../Pages/Code_Confirm";
+import Week_Activity from "../Pages/Week_Activity";
+import Payment from "../Pages/Payment";
 
 function Body() {
   return (

@@ -1,4 +1,6 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 function Navbar() {
   return (
@@ -9,9 +11,9 @@ function Navbar() {
             {/* <!-- Navigation Menu--> */}
             <ul className="navigation-menu">
               <li className="has-submenu">
-                <a href="index.html">
+                <NavLink to="/">
                   <i className="dripicons-device-desktop"></i>Dashboard
-                </a>
+                </NavLink>
               </li>
               <li className="has-submenu">
                 <a href="calender.html">
@@ -222,7 +224,7 @@ function Navbar() {
                   <li>
                     <ul>
                       <li>
-                        <a href="pages-login.html">Login</a>
+                        <NavLink to="/">Login</NavLink>
                       </li>
                       <li>
                         <a href="pages-register.html">Register</a>
@@ -258,10 +260,10 @@ function Navbar() {
                   <li>
                     <ul>
                       <li>
-                        <a href="pages-login.html">Country</a>
+                        <NavLink to="/country">Country</NavLink>
                       </li>
                       <li>
-                        <a href="pages-register.html">State</a>
+                        <NavLink to="/state">State</NavLink>
                       </li>
                       <li>
                         <a href="pages-recoverpw.html">City</a>
@@ -271,6 +273,10 @@ function Navbar() {
                 </ul>
               </li>
             </ul>
+            {/* onClick={() => setShow(true)} */}
+            <div className="pt-2 pb-2 right">
+              <Button className="btn btn-danger">Connect To Wallet</Button>
+            </div>
             {/* <!-- End navigation menu --> */}
           </div>
           {/* <!-- end #navigation --> */}

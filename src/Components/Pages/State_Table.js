@@ -1,22 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Leftbar from "./Leftbar";
-import Navbar from "./Navbar";
 import Rightbar from "./Rightbar";
-import "./Country_Table.css";
-import { CountryData } from "../../JSON/Table_Data";
+import Navbar from "./Navbar";
+import "./State_Table.css";
 import { Button } from "react-bootstrap";
 import Modal from "../Modal";
 
-export const BasicExample = () => {
+export const State_Table = () => {
+  // useEffect
+  useEffect(() => {
+    callAPi();
+  }, []);
+
+  //   states
+  const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
+
+  // functions
+  const callAPi = async () => {
+    const url = "https://reqres.in/api/users?page=2";
+    const res = await fetch(url);
+    const response = await res.json();
+    setData([...response.data]);
+  };
+  console.log(data);
+
   const tableHead = [
-    { title: "#", width: "33%" },
-    { title: "Name", width: "33%" },
-    { title: "Code", width: "34%" },
+    { title: "id", width: "5%" },
+    { title: "email", width: "55%" },
+    { title: "first_name", width: "20%" },
+    { title: "last_name", width: "20%" },
   ];
   return (
     <div>
       <div>
+        {" "}
         <header id="topnav">
           <div className="topbar-main">
             <div className="container-fluid">
@@ -34,13 +52,9 @@ export const BasicExample = () => {
           <Navbar />
           {/* <!-- end navbar-custom --> */}
         </header>
-
-        {/* <!-- For demo purpose --> */}
-
-        <div className="container-fluid py-5 class= cus-top">
+        <div className="container-fluid py-5 cus-top">
           <div className="row">
             <div className="col-lg-12 bg-white rounded shadow">
-              {/* <!-- Fixed header table--> */}
               <div className="d-flex pt-2 pb-2 right">
                 <Button
                   className="btn btn-danger"
@@ -51,20 +65,21 @@ export const BasicExample = () => {
               </div>
               {show && (
                 <Modal
+                  setData={setData}
                   show={show}
                   onClose={() => setShow(false)}
                   closeModal={setShow}
                 />
               )}
               <div className="table-responsive">
-                <table className="table table-fixed">
+                <table className="table table-bordered">
                   <thead>
                     <tr>
                       {tableHead.map((data, index) => {
                         return (
                           <th
                             scope="col"
-                            className="col-3"
+                            className=""
                             style={{ width: data.width }}
                           >
                             {data.title}
@@ -73,23 +88,20 @@ export const BasicExample = () => {
                       })}
                     </tr>
                   </thead>
-                  <tbody style={{ display: "flex", flexDirection: "column" }}>
-                    {CountryData.map((data, index) => {
+                  <tbody>
+                    {data.map((data, index) => {
                       return (
-                        <tr>
-                          <th scope="row" className="col-3">
-                            {index + 1}
-                          </th>
-                          <td className="col-3">{data.name}</td>
-                          <td className="col-3">{data.code}</td>
+                        <tr key={index}>
+                          <th scope="row">{data.id}</th>
+                          <td>{data.email}</td>
+                          <td className="">{data.first_name}</td>
+                          <td className="">{data.last_name}</td>
                         </tr>
                       );
                     })}
                   </tbody>
                 </table>
               </div>
-
-              {/* <!-- End --> */}
             </div>
           </div>
         </div>
@@ -98,4 +110,4 @@ export const BasicExample = () => {
   );
 };
 
-export default BasicExample;
+export default State_Table;
