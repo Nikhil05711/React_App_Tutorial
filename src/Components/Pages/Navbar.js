@@ -1,8 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import { ethers } from "ethers";
 
 function Navbar() {
+  const [data, setData] = useState({
+    address: "",
+    balance: null,
+  });
+  const [show, setShow] = useState(true);
+  React.useEffect(() => {
+    handleButton();
+  }, []);
+  const handleButton = async () => {
+    if (window.ethereum) {
+      const res = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      console.log(res[0]);
+      return getBalance(res[0]);
+    } else {
+      alert("install metamask wallet !!");
+    }
+  };
+
+  const getBalance = async (address) => {
+    const res = await window.ethereum.request({
+      method: "eth_getBalance",
+      params: [address, "latest"],
+    });
+    const a = ethers.utils.formatEther(res);
+    setShow(!show);
+    console.log(a);
+    // .then((balance) => {
+    //   setData({
+    //     Balance: ethers.utils.formatEther(balance),
+    //   });
+    // });
+  };
+
+  const accountChangeHandler = (account) => {
+    setData({
+      address: account,
+    });
+    getBalance(account);
+  };
+
   return (
     <div>
       <div className="navbar-custom">
@@ -274,9 +317,12 @@ function Navbar() {
               </li>
             </ul>
             {/* onClick={() => setShow(true)} */}
-            <div className="pt-2 pb-2 right">
-              <Button className="btn btn-danger">Connect To Wallet</Button>
-            </div>
+            {show && (
+              <div className="pt-2 pb-2 right">
+                <Button className="btn btn-danger">Connect To Wallet</Button>
+              </div>
+            )}
+
             {/* <!-- End navigation menu --> */}
           </div>
           {/* <!-- end #navigation --> */}
