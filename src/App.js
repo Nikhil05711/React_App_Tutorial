@@ -7,6 +7,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { getCookie } from "./Components/Library/Cookies";
 import Login from "./Components/Component/Login";
 import Test from "./Components/Pages/Test";
+import "./global";
 
 function App() {
   const navigate = useNavigate();
