@@ -1,61 +1,117 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RTCP from "../../abi/RTCP.json";
 import Swap from "../../abi/Swap.json";
-import { ethers } from "ethers";
+import { current } from "@reduxjs/toolkit";
+const ethers = require("ethers");
+
 const RTCP_Address = "0xbafc67357ad8e7ee7aaacac8d13b2e40d823c5b4";
 const Swap_Address = "0x3b6f4f4eb3bb7cd26a94e51b393f8d78a121c05c";
-// const provider = process.env.REACT_APP_RPC_URL;
-
-const RTCP_abi = RTCP.abi;
-const Swap_abi = Swap.abi;
-const provider = new ethers.providers.JsonRpcProvider(
-  "https://data-seed-prebsc-1-s1.binance.org:8545/"
-);
 
 function Activity() {
-  const [address, setAddress] = useState();
-  const [amount, setAmount] = useState();
-  // const [RTCP_Contract, setRTCP_Contract] = useState();
+  const [txns, setTxns] = useState([]);
+  const [contractListened, setContractListened] = useState();
+  const [contractInfo, setContractInfo] = useState({
+    address: "-",
+    name: "-",
+    symbol: "-",
+    totalSupply: "-",
+  });
 
-  const handleApproveAddress = (e) => {
-    setAddress(e.target.value);
-  };
+  // const [balance, setBalance] = useState({
+  //   address: "",
+  //   balance: "",
+  // });
 
-  const handleApproveAmount = (e) => {
-    setAmount(e.target.value);
-  };
+  useEffect(() => {
+    if (contractInfo.address !== "-") {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const Token = new ethers.Contract(
+        contractInfo.address,
+        RTCP.abi,
+        provider
+      );
 
-  const handleDepositSubmit = (e) => {
+      Token.on("Transfer", (from, to, amount, event) => {
+        console.log({ from, to, amount, event });
+
+        setTxns((currentTxs) => [
+          ...currentTxs,
+          {
+            txHash: event.transactionHash,
+            from,
+            to,
+            amount: String(amount),
+          },
+        ]);
+      });
+      setContractListened(Token);
+
+      return () => {
+        contractListened.removeAllListeners();
+      };
+    }
+  }, [contractInfo.address]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const data = new FormData(e.target);
+    const provider = new ethers.provider.Web3Provider(window.ethereum);
+    const Token = new ethers.Contract(RTCP_Address, RTCP, provider);
+    const tokenName = await Token.name();
+    const tokenSymbol = await Token.symbol();
+    const tokenTotalSupply = await Token.totalSupply();
   };
 
-  const getBalance = async () => {
-    const balance = await provider.getBalance(RTCP_Address);
-    ethers.utils.formatEther(balance);
-  };
+  // setContractInfo({
+  //   address: RTCP_Address,
+  //   tokenName: "",
+  //   tokenSymbol: "",
+  //   tokenTotalSupply: "",
+  // });
 
-  let sendTransaction = async () => {
-    const RTCP_Contract = new ethers.Contract(RTCP_Address, RTCP_abi, provider);
-    const myAddress = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
-    console.log(RTCP_Contract);
-    // setRTCP_Contract(RTCP_Contract);
-    // const amount = setAmount(e.target.value);
-  };
-  sendTransaction();
-
-  // let x = async () => {
-  //   let a = await RTCP_Contract.functions.name();
-  //   console.log(a);
+  // const myBalance = async () => {
+  //   const provider = new ethers.provider.Web3Provider(window.ethereum);
+  //   await provider.send("eth_requestAccounts", []);
+  //   const Token = new ethers.Contract(RTCP_Address, RTCP, provider);
+  //   const signer = await provider.getSigner();
+  //   const signerAddress = await signer.getAddress();
+  //   const balance = await Token.balanceOf(signerAddress);
   // };
-  // x();
+
+  // setBalance({
+  //   address: signerAddress,
+  //   balance: String(balance),
+  // });
+
+  // console.log(myBalance);
+
+  const handleApprove = async (e) => {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send("eth_requestAccounts", []);
+    const signer = provider.getSigner();
+    const Token = new ethers.Contract(RTCP_Address, RTCP.abi, signer);
+    console.log(data.get("address"));
+    const tx = await Token.approve(data.get("address"), data.get("amount"));
+    console.log(tx);
+  };
+
+  // const handleTransfer = async (e) => {
+  //   e.preventDefault();
+  //   const data = new FormData(e.target);
+  //   const provider = new ethers.providers.Web3Provider(window.ethereum);
+  //   await provider.send("eth_requestAccounts", []);
+  //   const signer = await provider.getSigner();
+  //   const Token = new ethers.Contract(RTCP_Address, RTCP, signer);
+  //   await Token.transferPrice(data.get("address"), data.get("amount"));
+  // };
   return (
     <div>
       <div className="card-header">
         <h5 className="header-title mt-0">Activity</h5>
       </div>
-      <div className="card-body" onSubmit={handleDepositSubmit}>
+      <form className="card-body" onSubmit={handleApprove}>
         <div className="form-group">
           <input
             className="form-control"
@@ -63,8 +119,6 @@ function Activity() {
             required=""
             placeholder="Spender_address"
             name="address"
-            onChange={handleApproveAddress}
-            value={address}
           />
         </div>
         <div className="form-group">
@@ -75,20 +129,18 @@ function Activity() {
             required="number"
             placeholder="amount"
             name="amount"
-            onChange={handleApproveAmount}
-            value={amount}
+            // onChange={handleChange}
+            // value={input.amount}
           />
         </div>
         <button
           className="btn btn-danger btn-block waves-effect waves-light"
           type="submit"
-          // onClick={() => RTCP_Contract.approve()}
         >
           Approve
         </button>
-      </div>
+      </form>
     </div>
   );
 }
-
 export default Activity;
