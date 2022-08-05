@@ -5,10 +5,21 @@ import Navbar from "./Navbar";
 import "./State_Table.css";
 import { Button } from "react-bootstrap";
 import Product_Modal from "./Product_Modal";
+import { postRequest } from "../../Services/API_service";
 
 function Product() {
   const [data, setData] = useState([]);
+  const [product, setProduct] = useState([]);
   const [show, setShow] = useState(false);
+
+  async function getData() {
+    let _data = await postRequest("/api/Products");
+    if (_data.statusCode === 1) {
+      console.log("result", _data.result);
+      setProduct(_data.result);
+    }
+    console.log("data", product);
+  }
 
   const tableHead = [
     { title: "id", width: "5%" },
@@ -19,6 +30,7 @@ function Product() {
     { title: "image", width: "5" },
     { title: "action", width: "5" },
   ];
+
   return (
     <div>
       <header id="topnav">
@@ -44,6 +56,11 @@ function Product() {
             <div className="d-flex pt-2 pb-2 right">
               <Button className="btn btn-danger" onClick={() => setShow(true)}>
                 New
+              </Button>
+            </div>
+            <div className="d-flex pt-2 pb-2 right">
+              <Button className="btn btn-danger" onClick={() => getData()}>
+                Load Data
               </Button>
             </div>
             {show && (
@@ -72,16 +89,16 @@ function Product() {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.map((data, index) => {
+                  {product?.map((data, index) => {
                     return (
                       <tr key={index}>
-                        <th scope="row">{data.id}</th>
-                        <td>{data.Category_Name}</td>
-                        <td className="">{data.Product_Name}</td>
-                        <td className="">{data.MRP}</td>
-                        <td className="">{data.Selling_Price}</td>
-                        <td className="">{data.image}</td>
-                        <td className="">{data.action}</td>
+                        <th scope="row">{data.productID}</th>
+                        <td>{data.category.categoryName}</td>
+                        <td className="">{data.productName}</td>
+                        <td className="">{data.mrp}</td>
+                        <td className="">{data.sellingPrice}</td>
+                        <td className=""></td>
+                        <td className=""></td>
                       </tr>
                     );
                   })}

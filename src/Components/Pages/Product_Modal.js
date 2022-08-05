@@ -1,12 +1,6 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-const api = axios.create({
-  baseURL: `http://localhost:3000`,
-});
+import React, { useState } from "react";
 
 function Product_Modal({ closeModal, setData }) {
-  const [token, setToken] = useState(null);
-
   const [input, setInput] = useState({
     id: "",
     Category_Name: "",

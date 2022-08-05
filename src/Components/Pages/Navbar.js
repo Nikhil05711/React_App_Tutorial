@@ -280,10 +280,10 @@ function Navbar() {
                   <li>
                     <ul>
                       <li>
-                        <NavLink to="/items">Products</NavLink>
+                        <NavLink to="/product">Products</NavLink>
                       </li>
                       <li>
-                        <a href="pages-404.html">Error 404</a>
+                        <NavLink to="/token">Generate_Token</NavLink>
                       </li>
                       <li>
                         <a href="pages-500.html">Error 500</a>

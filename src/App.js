@@ -7,6 +7,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { getCookie } from "./Components/Library/Cookies";
 import Login from "./Components/Component/Login";
 import Product from "./Components/Pages/product";
+import Generate_Token from "./Components/Pages/Generate_Token";
 import "./global";
 
 function App() {
@@ -31,11 +32,12 @@ function App() {
           <Route exact path="/" element={<Topbar />} />
           <Route exact path="/country" element={<BasicExample />} />
           <Route exact path="/state" element={<State_Table />} />
-          <Route exact path="/items" element={<Product />} />
+          <Route exact path="/products" element={<Product />} />
+          {/* <Route exact path="/Generate_Token" element={<Generate_Token />} /> */}
         </Routes>
       ) : (
         <Routes>
-          <Route exact path="/" element={<Login />} />
+          <Route exact path="/" element={<Generate_Token />} />
         </Routes>
       )}
     </div>
