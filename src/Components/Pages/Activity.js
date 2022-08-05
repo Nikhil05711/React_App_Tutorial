@@ -62,29 +62,6 @@ function Activity() {
     const tokenTotalSupply = await Token.totalSupply();
   };
 
-  // setContractInfo({
-  //   address: RTCP_Address,
-  //   tokenName: "",
-  //   tokenSymbol: "",
-  //   tokenTotalSupply: "",
-  // });
-
-  // const myBalance = async () => {
-  //   const provider = new ethers.provider.Web3Provider(window.ethereum);
-  //   await provider.send("eth_requestAccounts", []);
-  //   const Token = new ethers.Contract(RTCP_Address, RTCP, provider);
-  //   const signer = await provider.getSigner();
-  //   const signerAddress = await signer.getAddress();
-  //   const balance = await Token.balanceOf(signerAddress);
-  // };
-
-  // setBalance({
-  //   address: signerAddress,
-  //   balance: String(balance),
-  // });
-
-  // console.log(myBalance);
-
   const handleApprove = async (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
@@ -97,15 +74,6 @@ function Activity() {
     console.log(tx);
   };
 
-  // const handleTransfer = async (e) => {
-  //   e.preventDefault();
-  //   const data = new FormData(e.target);
-  //   const provider = new ethers.providers.Web3Provider(window.ethereum);
-  //   await provider.send("eth_requestAccounts", []);
-  //   const signer = await provider.getSigner();
-  //   const Token = new ethers.Contract(RTCP_Address, RTCP, signer);
-  //   await Token.transferPrice(data.get("address"), data.get("amount"));
-  // };
   return (
     <div>
       <div className="card-header">

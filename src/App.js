@@ -6,7 +6,7 @@ import State_Table from "./Components/Pages/State_Table";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { getCookie } from "./Components/Library/Cookies";
 import Login from "./Components/Component/Login";
-import Test from "./Components/Pages/Test";
+import Product from "./Components/Pages/product";
 import "./global";
 
 function App() {
@@ -31,6 +31,7 @@ function App() {
           <Route exact path="/" element={<Topbar />} />
           <Route exact path="/country" element={<BasicExample />} />
           <Route exact path="/state" element={<State_Table />} />
+          <Route exact path="/items" element={<Product />} />
         </Routes>
       ) : (
         <Routes>

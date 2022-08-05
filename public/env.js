@@ -12,6 +12,8 @@ window.env = {
   "DriverData": "C:\\Windows\\System32\\Drivers\\DriverData",
   "EDITOR": "notepad.exe",
   "ETHEREUM_SOCKET": "\\\\.\\pipe\\geth.ipc",
+  "FPS_BROWSER_APP_PROFILE_STRING": "Internet Explorer",
+  "FPS_BROWSER_USER_PROFILE_STRING": "Default",
   "GOPATH": "C:\\Users\\round\\go",
   "HOME": "C:\\Users\\round",
   "HOMEDRIVE": "C:",

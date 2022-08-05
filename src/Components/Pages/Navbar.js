@@ -31,14 +31,9 @@ function Navbar() {
       params: [address, "latest"],
     });
     const a = ethers.utils.formatEther(res);
-    // asset();
+
     setShow(!show);
     console.log(a);
-    // .then((balance) => {
-    //   setData({
-    //     Balance: ethers.utils.formatEther(balance),
-    //   });
-    // });
   };
 
   const accountChangeHandler = (account) => {
@@ -47,28 +42,6 @@ function Navbar() {
     });
     getBalance(account);
   };
-
-  // const [dataa, setDataa] = useState({
-  //   id: 1,
-  //   jsonrpc: "2.0",
-  //   method: "wallet_getOwnedAssets",
-  //   params: [
-  //     "0x3333333333333333333333333333333333333333",
-  //     {
-  //       justification:
-  //         "The dApp needs to know about all your assets in order to calculate your taxes properly.",
-  //     },
-  //   ],
-  // });
-  // const asset = async () => {
-  //   const res = await axios({
-  //     method: "post",
-  //     url: "/t/eip-2256-add-wallet-getownedassets-json-rpc-method/3600",
-  //     data: dataa,
-  //   });
-  //   console.log("asset", res);
-  //   return res;
-  // };
 
   return (
     <div>
@@ -307,7 +280,7 @@ function Navbar() {
                   <li>
                     <ul>
                       <li>
-                        <a href="pages-blank.html">Blank Page</a>
+                        <NavLink to="/items">Products</NavLink>
                       </li>
                       <li>
                         <a href="pages-404.html">Error 404</a>
