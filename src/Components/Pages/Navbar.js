@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { ethers } from "ethers";
+import axios from "axios";
 
 function Navbar() {
   const [data, setData] = useState({
@@ -30,13 +31,9 @@ function Navbar() {
       params: [address, "latest"],
     });
     const a = ethers.utils.formatEther(res);
+
     setShow(!show);
     console.log(a);
-    // .then((balance) => {
-    //   setData({
-    //     Balance: ethers.utils.formatEther(balance),
-    //   });
-    // });
   };
 
   const accountChangeHandler = (account) => {
@@ -283,10 +280,10 @@ function Navbar() {
                   <li>
                     <ul>
                       <li>
-                        <a href="pages-blank.html">Blank Page</a>
+                        <NavLink to="/product">Products</NavLink>
                       </li>
                       <li>
-                        <a href="pages-404.html">Error 404</a>
+                        <NavLink to="/token">Generate_Token</NavLink>
                       </li>
                       <li>
                         <a href="pages-500.html">Error 500</a>
