@@ -8,6 +8,8 @@ import { getCookie } from "./Components/Library/Cookies";
 import Login from "./Components/Component/Login";
 import Product from "./Components/Pages/product";
 import Generate_Token from "./Components/Pages/Generate_Token";
+import Categories from "./Components/Pages/Categories";
+import Order_Summary from "./Components/Pages/Order_Summary";
 import "./global";
 
 function App() {
@@ -32,8 +34,9 @@ function App() {
           <Route exact path="/" element={<Topbar />} />
           <Route exact path="/country" element={<BasicExample />} />
           <Route exact path="/state" element={<State_Table />} />
-          <Route exact path="/products" element={<Product />} />
-          {/* <Route exact path="/Generate_Token" element={<Generate_Token />} /> */}
+          <Route exact path="/product" element={<Product />} />
+          <Route exact path="/Category" element={<Categories />} />
+          <Route exact path="/Order_Summary" element={<Order_Summary />} />
         </Routes>
       ) : (
         <Routes>

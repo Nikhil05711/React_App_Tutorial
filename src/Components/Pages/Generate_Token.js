@@ -17,6 +17,7 @@ const ColoredLine = ({ color }) => (
 export default function Generate_Token() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState();
+
   async function getToken() {
     var data = await postRequest(
       `/Account/ApiLogin?MobileNo=${formData.email}&Password=${formData.password}`
@@ -24,7 +25,7 @@ export default function Generate_Token() {
     console.log("data:", data);
     if (data.statusCode === 1) {
       setCookie(".milkyfie_user", JSON.stringify(data.result), 30);
-      return navigate("/products");
+      return navigate("/");
     }
   }
 

@@ -273,7 +273,7 @@ function Navbar() {
                         <a href="pages-recoverpw.html">Recover Password</a>
                       </li>
                       <li>
-                        <a href="pages-lock-screen.html">Lock Screen</a>
+                        <NavLink to="/Order_Summary">Orders History</NavLink>
                       </li>
                     </ul>
                   </li>
@@ -283,10 +283,10 @@ function Navbar() {
                         <NavLink to="/product">Products</NavLink>
                       </li>
                       <li>
-                        <NavLink to="/token">Generate_Token</NavLink>
+                        <NavLink to="/">Generate_Token</NavLink>
                       </li>
                       <li>
-                        <a href="pages-500.html">Error 500</a>
+                        <NavLink to="/Category">Categories</NavLink>
                       </li>
                     </ul>
                   </li>
