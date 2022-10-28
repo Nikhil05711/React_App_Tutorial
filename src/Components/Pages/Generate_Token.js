@@ -3,7 +3,7 @@ import "../Component/Login.css";
 import { postRequest } from "../../Services/API_service";
 import { setCookie } from "../Library/Cookies";
 import { useNavigate } from "react-router";
-
+import { DATACONSTANT } from "../../constants/data.constant";
 const ColoredLine = ({ color }) => (
   <hr
     style={{
@@ -18,13 +18,20 @@ export default function Generate_Token() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState();
 
-  async function getToken() {
-    var data = await postRequest(
-      `/Account/ApiLogin?MobileNo=${formData.email}&Password=${formData.password}`
-    );
-    console.log("data:", data);
-    if (data.statusCode === 1) {
-      setCookie(".milkyfie_user", JSON.stringify(data.result), 30);
+  async function getToken(e) {
+    e.preventDefault();
+    var postResponse = await postRequest(DATACONSTANT.LOGIN_URL, {
+      // loginTypeID: 1,
+      Domain: DATACONSTANT.DOMAIN_NAME,
+      UserID: formData.email,
+      Password: formData.password,
+    });
+    // localStorage.setItem("item", "enter");
+    // return navigate("/", { state: "tool" });
+    console.log("data_1:", postResponse.data);
+    if (postResponse?.statuscode === 1) {
+      setCookie(DATACONSTANT.SETCOOKIE, JSON.stringify(postResponse.data), 30);
+      // localStorage.setItem("item", "enter");
       return navigate("/");
     }
   }
@@ -44,12 +51,12 @@ export default function Generate_Token() {
               </a>
             </div>
             <div className="p-3">
-              <form className="form-horizontal m-t-20">
+              <form className="form-horizontal m-t-20" onSubmit={getToken}>
                 <div className="form-group row">
                   <div className="col-12">
                     <input
                       className="form-control"
-                      type="email"
+                      type="tel"
                       required=""
                       placeholder="Email Address"
                       name="email"
@@ -93,7 +100,8 @@ export default function Generate_Token() {
                       type="submit"
                       onClick={getToken}
                     >
-                      Generate Token
+                      Login
+                      {/* Generate Token */}
                     </button>
                   </div>
                 </div>
@@ -101,13 +109,13 @@ export default function Generate_Token() {
                   <div className="col-sm-7 m-t-20">
                     <a href="pages-recoverpw.html" className="text-muted">
                       <i className="mdi mdi-lock"></i>{" "}
-                      <small>Forgot your Token ?</small>
+                      <small>Forgot your password ?</small>
                     </a>
                   </div>
                   <div className="col-sm-5 m-t-20">
                     <a href="pages-register.html" className="text-muted">
                       <i className="mdi mdi-account-circle"></i>{" "}
-                      <small>Create a Token ?</small>
+                      <small>Create account ?</small>
                     </a>
                   </div>
                 </div>

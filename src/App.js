@@ -3,7 +3,7 @@ import "./App.css";
 import Topbar from "./Components/Component/Header";
 import BasicExample from "./Components/Pages/Country_Table";
 import State_Table from "./Components/Pages/State_Table";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { getCookie } from "./Components/Library/Cookies";
 import Login from "./Components/Component/Login";
 import Product from "./Components/Pages/product";
@@ -11,20 +11,24 @@ import Generate_Token from "./Components/Pages/Generate_Token";
 import Categories from "./Components/Pages/Categories";
 import Order_Summary from "./Components/Pages/Order_Summary";
 import "./global";
+import { DATACONSTANT } from "./constants/data.constant";
 
 function App() {
   const navigate = useNavigate();
   const [page, setPage] = useState(true);
-  let x = getCookie(".milkyfie_user");
+  let x = getCookie(DATACONSTANT.SETCOOKIE);
   useEffect(() => {
     console.log(x);
-    if (!getCookie(".milkyfie_user")) {
+    if (!getCookie(DATACONSTANT.SETCOOKIE)) {
       setPage(false);
       return navigate("/");
     } else {
-      return setPage(true);
+      setPage(true);
+      return navigate("/");
     }
   }, [page, x]);
+
+  const location = useLocation();
 
   return (
     <div>
