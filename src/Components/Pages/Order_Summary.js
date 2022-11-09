@@ -3,32 +3,31 @@ import Leftbar from "./Leftbar";
 import Rightbar from "./Rightbar";
 import Navbar from "./Navbar";
 import "./State_Table.css";
-import { Button } from "react-bootstrap";
-import Product_Modal from "./Product_Modal";
+import { button } from "react-bootstrap";
 import { postRequest } from "../../Services/API_service";
 
-function Product() {
+function Order_Summary() {
+  const [order, setOrder] = useState([]);
   const [data, setData] = useState([]);
-  const [product, setProduct] = useState([]);
-  const [show, setShow] = useState(false);
 
   async function getData() {
-    let _data = await postRequest("/api/Products");
+    let _data = await postRequest("/api/OrderSummary");
     if (_data.statusCode === 1) {
       // console.log("result", _data.result);
-      setProduct(_data.result);
+      setOrder(_data.result);
     }
-    // console.log("data", product);
+    // console.log("_data : ", order);
   }
 
   const tableHead = [
-    { title: "id", width: "5%" },
-    { title: "Category_Name", width: "25%" },
-    { title: "Product_Name", width: "35%" },
-    { title: "MRP", width: "10" },
-    { title: "Selling_Price", width: "15" },
-    { title: "image", width: "5" },
-    { title: "action", width: "5" },
+    { title: "orderID", width: "5%" },
+    { title: "name", width: "15%" },
+    { title: "userID", width: "5%" },
+    { title: "orderDate", width: "10%" },
+    { title: "email", width: "35%" },
+    { title: "phoneNumber", width: "15%" },
+    { title: "statusValue", width: "10%" },
+    { title: "pincode", width: "5%" },
   ];
 
   return (
@@ -54,23 +53,10 @@ function Product() {
         <div className="row">
           <div className="col-lg-12 bg-white rounded shadow">
             <div className="d-flex pt-2 pb-2 right">
-              <Button className="btn btn-danger" onClick={() => setShow(true)}>
-                New
-              </Button>
+              <button className="btn btn-danger" onClick={() => getData()}>
+                Order History
+              </button>
             </div>
-            <div className="d-flex pt-2 pb-2 right">
-              <Button className="btn btn-danger" onClick={() => getData()}>
-                Load Data
-              </Button>
-            </div>
-            {show && (
-              <Product_Modal
-                setData={setData}
-                show={show}
-                onClose={() => setShow(false)}
-                closeModal={setShow}
-              />
-            )}
             <div className="table-responsive">
               <table className="table table-bordered">
                 <thead>
@@ -89,16 +75,18 @@ function Product() {
                   </tr>
                 </thead>
                 <tbody>
-                  {product?.map((data, index) => {
+                  {order.map((data, index) => {
                     return (
                       <tr key={index}>
-                        <th scope="row">{data.productID}</th>
-                        <td>{data.category.categoryName}</td>
-                        <td className="">{data.productName}</td>
-                        <td className="">{data.mrp}</td>
-                        <td className="">{data.sellingPrice}</td>
-                        <td className=""></td>
-                        <td className=""></td>
+                        <th scope="row">{data.orderID}</th>
+                        <td>{data.name}</td>
+                        <td>{data.userID}</td>
+                        <td>{data.orderDate}</td>
+                        <td>{data.email}</td>
+                        <td>{data.phoneNumber}</td>
+                        <td>{data.statusValue}</td>
+                        <td>{data.pincode}</td>
+                        {/* <td className="">{data.isActive.toString()}</td> */}
                       </tr>
                     );
                   })}
@@ -112,4 +100,4 @@ function Product() {
   );
 }
 
-export default Product;
+export default Order_Summary;

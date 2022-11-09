@@ -1,36 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Leftbar from "./Leftbar";
 import Rightbar from "./Rightbar";
 import Navbar from "./Navbar";
 import "./State_Table.css";
 import { Button } from "react-bootstrap";
-import Modal from "../Modal";
+import { postRequest } from "../../Services/API_service";
 
-export const State_Table = () => {
-  // useEffect
-  useEffect(() => {
-    callAPi();
-  }, []);
+function Categories() {
+  const [info, setInfo] = useState([]);
+  const [Category, setCategory] = useState([]);
 
-  //   states
-  const [data, setData] = useState([]);
-  const [show, setShow] = useState(false);
+  async function getData() {
+    let data = await postRequest("/api/CategoryDetails");
+    if (data.statusCode === 1) {
+      // console.log("result", data.result);
+      setCategory(data.result);
+    }
+    // console.log("data", Category);
+  }
 
-  // functions
-  const callAPi = async () => {
-    const url = "https://reqres.in/api/users?page=2";
-    const res = await fetch(url);
-    const response = await res.json();
-    setData([...response.data]);
-  };
-  // console.log(data);
-
-  const tableHead = [
-    { title: "id", width: "5%" },
-    { title: "email", width: "55%" },
-    { title: "first_name", width: "20%" },
-    { title: "last_name", width: "20%" },
+  const tableHeaders = [
+    { title: "categoryID", width: "33%" },
+    { title: "categoryName", width: "33%" },
+    { title: "isActive", width: "33%" },
   ];
+
   return (
     <div>
       <div>
@@ -56,46 +50,34 @@ export const State_Table = () => {
           <div className="row">
             <div className="col-lg-12 bg-white rounded shadow">
               <div className="d-flex pt-2 pb-2 right">
-                <Button
-                  className="btn btn-danger"
-                  onClick={() => setShow(true)}
-                >
-                  New
+                <Button className="btn btn-danger" onClick={() => getData()}>
+                  Categories
                 </Button>
               </div>
-              {show && (
-                <Modal
-                  setData={setData}
-                  show={show}
-                  onClose={() => setShow(false)}
-                  closeModal={setShow}
-                />
-              )}
               <div className="table-responsive">
                 <table className="table table-bordered">
                   <thead>
                     <tr>
-                      {tableHead.map((data, index) => {
+                      {tableHeaders.map((info, index) => {
                         return (
                           <th
                             scope="col"
                             className=""
-                            style={{ width: data.width }}
+                            style={{ width: info.width }}
                           >
-                            {data.title}
+                            {info.title}
                           </th>
                         );
                       })}
                     </tr>
                   </thead>
                   <tbody>
-                    {data.map((data, index) => {
+                    {Category.map((info, index) => {
                       return (
                         <tr key={index}>
-                          <th scope="row">{data.id}</th>
-                          <td>{data.email}</td>
-                          <td className="">{data.first_name}</td>
-                          <td className="">{data.last_name}</td>
+                          <th scope="row">{info.categoryID}</th>
+                          <td>{info.categoryName}</td>
+                          <td className="">{info.isActive.toString()}</td>
                         </tr>
                       );
                     })}
@@ -108,6 +90,6 @@ export const State_Table = () => {
       </div>
     </div>
   );
-};
+}
 
-export default State_Table;
+export default Categories;
